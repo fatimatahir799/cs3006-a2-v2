@@ -1,0 +1,18 @@
+Program 5, saxpy (result = scale*X + Y, N=20 million), on Intel i5-7200U:
+
+ISPC (no tasks): 24.609 ms, 12.110 GB/s, 1.625 GFLOPS
+ISPC (with tasks): 24.466 ms, 12.181 GB/s, 1.635 GFLOPS
+Speedup from tasks: 1.01x (essentially no improvement)
+
+Analysis: saxpy performs only one multiply and one add per element, but must
+load two floats (X, Y) and store one float (result) for every operation --
+very little compute per byte of memory traffic. This makes saxpy memory-
+bandwidth bound rather than compute bound. Since ISPC (single core, SIMD)
+already saturates the machine's shared memory bus, launching tasks across
+additional cores does not help: all cores contend for the same limited
+bandwidth rather than doing independent, bandwidth-free work. This is a
+hardware ceiling. No, this cannot be substantially improved by rewriting
+the code -- the operation is already minimal (one FMA per element), so
+there is no way to reduce memory traffic further while still computing
+the same result; near-linear speedup is not achievable for a bandwidth-
+bound workload like this.
