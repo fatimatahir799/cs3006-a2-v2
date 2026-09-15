@@ -1,0 +1,12 @@
+Vector utilization sweep, clampedExp, N=10000, on Intel i5-7200U:
+Width 2:  88.6% utilization
+Width 4:  83.6% utilization
+Width 8:  81.0% utilization
+Width 16: 79.7% utilization
+
+Conclusion: Utilization decreases as VECTOR_WIDTH increases. The inner loop of
+clampedExpVector must run until every lane in a group finishes its exponent
+countdown, so lanes with small exponents sit idle (masked off) while lanes with
+larger exponents keep iterating. Exponents are random (0-9), so wider vector
+groups have a higher chance of containing an outlier large exponent, causing
+more wasted lane-cycles relative to group size as width grows.
