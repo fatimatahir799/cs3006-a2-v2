@@ -1,0 +1,10 @@
+Interleaved-row decomposition, View 1, on Intel i5-7200U (2 cores/4 threads):
+[paste your actual numbers here after running Step 2]
+
+Conclusion: Speedup plateaus around 3.2-3.4x, matching this machine's
+2-core/4-thread ceiling per the addendum's rescaled targets. Basic block
+decomposition (equal-sized row strips) causes severe load imbalance since
+the Mandelbrot set's compute cost is concentrated near the image center;
+interleaved rows spread the expensive computation evenly across threads,
+fixing both the imbalance and the crash at thread counts that don't evenly
+divide the image height.
