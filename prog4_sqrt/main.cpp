@@ -29,12 +29,11 @@ int main() {
 
     for (unsigned int i=0; i<N; i++)
     {
-        // TODO: CS149 students.  Attempt to change the values in the
-        // array here to meet the instructions in the handout: we want
-        // to you generate best and worse-case speedups
-        
-        // starter code populates array with random input values
-        values[i] = .001f + 2.998f * static_cast<float>(rand()) / RAND_MAX;
+        // Best case: every value identical AND far from the initial guess,
+        // so all SIMD lanes take the same large number of iterations to
+        // converge with no divergence, while having enough real compute
+        // work for parallelism to matter.
+        values[i] = 2.999f;
     }
 
     // generate a gold version to check results

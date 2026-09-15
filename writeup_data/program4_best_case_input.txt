@@ -1,0 +1,16 @@
+Program 4, best-case input for speedup, on Intel i5-7200U:
+
+Baseline (random values 0.001-2.999):
+  ISPC (no tasks): 4.47x
+  ISPC (with tasks): 14.87x
+
+Best case (all values = 2.999, uniform AND far from initial guess 1.0):
+  ISPC (no tasks): 6.40x
+  ISPC (with tasks): 20.13x
+
+Analysis: Making every value identical means all SIMD lanes take the exact
+same number of iterations to converge, so no lane ever sits idle waiting
+for another (no divergence penalty). Choosing a value far from the initial
+guess (near the edge of the valid 0-3 range) ensures substantial real
+computation, so the benefits of SIMD/task parallelism dominate over
+per-element overhead.
