@@ -242,14 +242,42 @@ void clampedExpSerial(float* values, int* exponents, float* output, int N) {
 
 void clampedExpVector(float* values, int* exponents, float* output, int N) {
 
-  //
-  // CS149 STUDENTS TODO: Implement your vectorized version of
-  // clampedExpSerial() here.
-  //
-  // Your solution should work for any value of
-  // N and VECTOR_WIDTH, not just when VECTOR_WIDTH divides N
-  //
-  
+    __cs149_vec_float x;
+    __cs149_vec_int y;
+    __cs149_vec_float result;
+    __cs149_vec_int count;
+    __cs149_vec_int one_int = _cs149_vset_int(1);
+    __cs149_vec_float clampVal = _cs149_vset_float(9.999999f);
+    __cs149_mask maskAll, maskCount, maskClamp;
+
+    for (int i = 0; i < N; i += VECTOR_WIDTH) {
+
+        int remaining = N - i;
+        int lanes = (remaining < VECTOR_WIDTH) ? remaining : VECTOR_WIDTH;
+        maskAll = _cs149_init_ones(lanes);
+
+        _cs149_vload_float(x, values + i, maskAll);
+        _cs149_vload_int(y, exponents + i, maskAll);
+
+        _cs149_vset_float(result, 1.f, maskAll);
+
+        _cs149_vset_int(count, 0, maskAll);
+        _cs149_vadd_int(count, count, y, maskAll);
+
+        __cs149_vec_int zero_int = _cs149_vset_int(0);
+        _cs149_vgt_int(maskCount, count, zero_int, maskAll);
+
+        while (_cs149_cntbits(maskCount) > 0) {
+            _cs149_vmult_float(result, result, x, maskCount);
+            _cs149_vsub_int(count, count, one_int, maskCount);
+            _cs149_vgt_int(maskCount, count, zero_int, maskAll);
+        }
+
+        _cs149_vgt_float(maskClamp, result, clampVal, maskAll);
+        _cs149_vset_float(result, 9.999999f, maskClamp);
+
+        _cs149_vstore_float(output + i, result, maskAll);
+    }  
 }
 
 // returns the sum of all elements in values
