@@ -1,0 +1,16 @@
+Program 4, worst-case input for speedup, on Intel i5-7200U:
+
+Baseline (random values 0.001-2.999):
+  ISPC (no tasks): 4.47x
+
+Worst case (alternating 1.0 / 2.999):
+  ISPC (no tasks): 3.27x
+  ISPC (with tasks): 10.42x
+
+Analysis: Alternating fast-converging (1.0) and slow-converging (2.999)
+values guarantees every 8-wide SIMD gang contains both types. Since all
+lanes in a gang execute in lockstep, the fast lanes finish in ~1 iteration
+but must sit idle (masked off, doing no useful work) for the remaining
+iterations while the slow lanes in the same gang continue converging.
+This confirms that data-dependent divergence, not raw computation amount,
+is what limits SIMD speedup in this workload.

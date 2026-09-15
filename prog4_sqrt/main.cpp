@@ -29,13 +29,16 @@ int main() {
 
     for (unsigned int i=0; i<N; i++)
     {
-        // Best case: every value identical AND far from the initial guess,
-        // so all SIMD lanes take the same large number of iterations to
-        // converge with no divergence, while having enough real compute
-        // work for parallelism to matter.
-        values[i] = 2.999f;
+        // Worst case: alternate between a fast-converging value (near the
+        // initial guess) and a slow-converging value (far from it). Every
+        // 8-wide SIMD gang contains both types, forcing fast lanes to sit
+        // idle every iteration while waiting for the slow lane(s).
+        if (i % 2 == 0) {
+            values[i] = 1.0f;
+        } else {
+            values[i] = 2.999f;
+        }
     }
-
     // generate a gold version to check results
     for (unsigned int i=0; i<N; i++)
         gold[i] = sqrt(values[i]);
