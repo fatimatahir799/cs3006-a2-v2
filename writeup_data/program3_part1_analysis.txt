@@ -1,0 +1,14 @@
+Program 3 Part 1, mandelbrot_ispc (no tasks), View 1, on Intel i5-7200U:
+Serial: 288.752 ms
+ISPC (SIMD only, AVX2 8-wide): 57.710 ms
+Speedup: 5.00x
+
+Theoretical ceiling: W = 8 (AVX2 8-wide single-precision SIMD lanes)
+
+Why observed speedup falls short of the ceiling:
+Within an ISPC gang, all lanes execute in lockstep (SIMD). The Mandelbrot
+computation has highly variable per-pixel cost -- pixels outside the set
+escape after few iterations, pixels inside/near the boundary run up to
+maxIterations. Since foreach groups nearby pixels into the same gang, a
+gang is only as fast as its slowest lane; fast lanes sit idle (masked off)
+until the slowest lane in their gang finishes.
