@@ -1,5 +1,10 @@
 Interleaved-row decomposition, View 1, on Intel i5-7200U (2 cores/4 threads):
-[paste your actual numbers here after running Step 2]
+2 threads: 2.21x
+3 threads: 2.97x
+4 threads: 3.29x
+6 threads: 3.36x
+7 threads: 3.33x
+8 threads: 3.45x
 
 Conclusion: Speedup plateaus around 3.2-3.4x, matching this machine's
 2-core/4-thread ceiling per the addendum's rescaled targets. Basic block
