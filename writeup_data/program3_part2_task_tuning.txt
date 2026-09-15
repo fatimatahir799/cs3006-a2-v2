@@ -1,0 +1,16 @@
+Program 3 Part 2, mandelbrot_ispc_withtasks, View 1, on Intel i5-7200U (2 cores, AVX2 W=8):
+
+Baseline (launch[2], starter code):
+  Speedup: 8.50x
+
+Final (launch[32], 800/32=25 exactly, no truncation issue):
+  Speedup: 15.89x
+
+Analysis: My machine's addendum-adjusted ceiling for Program 3 Part 2 is
+C x W = 2 physical cores x 8-wide AVX2 = 16x (vs Stanford's 32x figure,
+which assumes their 4-core myth machines). 32 tasks was chosen because it
+divides height=800 evenly and gives the task scheduler enough small units
+of work to spread evenly across both cores, smoothing out the load
+imbalance from uneven Mandelbrot iteration counts (same effect as
+Program 1's interleaving fix). Achieved 15.89x is essentially at the
+theoretical ceiling for this hardware.
