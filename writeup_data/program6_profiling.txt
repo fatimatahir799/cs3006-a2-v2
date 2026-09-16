@@ -1,0 +1,21 @@
+Program 6 profiling, unmodified serial baseline, M=100000, N=100, K=3, on Intel i5-7200U:
+
+Sample iterations (assignments / centroids / cost):
+iter 0:  49.04ms / 7.26ms / 13.81ms
+iter 10: 55.08ms / 9.18ms / 15.09ms
+iter 40: 49.47ms / 7.25ms / 13.87ms
+iter 77: 50.03ms / 8.31ms / 14.10ms
+
+Total runtime: 5653.791 ms over 78 iterations
+
+Analysis: computeAssignments consistently takes roughly 3.5x longer than
+computeCentroids and computeCost combined, across every iteration measured.
+This matches the expected asymptotic cost: computeAssignments performs
+K x M x N work (checking every point against every centroid), while
+computeCentroids and computeCost each perform only M x N work (one pass
+per point). With K=3, computeAssignments does roughly 3x the raw work of
+the other two functions, consistent with the ~3.5x timing gap observed
+(the extra overhead likely comes from computeAssignments' pow()/sqrt()
+calls inside dist(), called K times more often than in computeCost).
+computeAssignments is therefore the clear hotspot and the target for
+parallelization.
