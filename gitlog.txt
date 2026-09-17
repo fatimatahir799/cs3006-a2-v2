@@ -1,0 +1,24 @@
+d95a227 Stop tracking build-generated PNGs in prog6_kmeans; preserved copies live in writeup_data/plots
+4fcc86d Add final write-up PDF
+5c52dce Preserve Program 6 start/end plots before final cleanup
+fbc5243 Add Program 5 final 5-run measurement pass, confirms near-1x (occasionally sub-1x) speedup
+c49a0ff Add Program 4 final 5-run measurement pass for both best and worst case inputs
+47d4425 Add Program 3 final 5-run measurement pass with min/max
+77f151f Add Program 2 final 5-run measurement pass, confirms deterministic 83.6% utilization
+0c5f0fa Add Program 1 final 5-run measurement pass with min/max
+aeea03a Parallelize Program 6 computeAssignments via std::thread; full-scale measurements confirm 2.245x speedup, clearing Amdahl-adjusted threshold
+b225ff3 Add Program 6 profiling data confirming computeAssignments as the hotspot
+d97d8b3 Add generate_data.py for Program 6 dataset generation
+ebc0f94 Add Program 5 saxpy analysis: memory-bandwidth bound, no task speedup
+3c95d75 Add Program 4 worst-case input analysis (alternating fast/slow values)
+3974abf Add Program 4 best-case input analysis (uniform slow-converging values)
+b39a0a4 Complete Program 3 Part 2: tune task count to 32, achieve 15.89x speedup (hardware ceiling)
+75ff13e Add Program 3 Part 1 analysis: SIMD speedup shortfall explained by lane divergence
+2ea7f1f Add Program 2 vector width sweep data and analysis, confirmed width 4 at 83.6%
+ef4b642 Implement clampedExpVector using CS149 fake SIMD intrinsics
+1a2825f Fix Program 1 speedup data with actual measured values
+77f7dbe Add Program 1 speedup data across thread counts
+ac474c4 Implement interleaved-row decomposition for Program 1
+99b992e Add missing includes for GCC 13 compatibility
+046847f Add gitignore for build output and dataset
+2b5071d Initial commit: unmodified CS149 starter code
