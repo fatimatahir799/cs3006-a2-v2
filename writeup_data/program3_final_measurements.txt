@@ -1,0 +1,16 @@
+Program 3 final measurement pass, 5 repetitions, View 1, on Intel i5-7200U:
+
+ISPC no-tasks (Part 1):
+  5.03x, 4.85x, 5.06x, 5.06x, 5.04x
+  min: 4.85x, max: 5.06x
+
+ISPC with tasks, launch[32] (Part 2):
+  16.17x, 14.12x, 16.46x, 16.40x, 16.62x
+  min: 14.12x, max: 16.62x
+
+Note: No-tasks results are tightly clustered around the SIMD-only ceiling
+(W=8), consistent with earlier single-run measurement. With-tasks results
+show more variance (14.12x-16.62x), with most runs landing near the
+machine's C x W = 16x ceiling; the one lower outlier (run 2, 14.12x) is
+likely attributable to background OS scheduling noise given the very short
+absolute runtimes involved (17-20ms).
