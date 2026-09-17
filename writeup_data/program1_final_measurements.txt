@@ -1,0 +1,14 @@
+Program 1 final measurement pass, 5 repetitions per config, View 1, on Intel i5-7200U:
+
+4 threads: 2.93x, 3.39x, 3.39x, 3.39x, 3.44x
+  min: 2.93x, max: 3.44x
+
+8 threads: 2.97x, 3.30x, 3.48x, 3.53x, 3.44x
+  min: 2.97x, max: 3.53x
+
+Note: In both configurations, the first run consistently shows the lowest
+speedup, likely due to cold caches/system warm-up effects before subsequent
+runs. Excluding the first run, results are tightly clustered (3.39x-3.44x
+at 4 threads, 3.30x-3.53x at 8 threads), consistent with earlier
+measurements and matching the addendum's ~3-3.5x predicted range for a
+2-core/4-thread machine.
