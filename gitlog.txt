@@ -1,24 +1,126 @@
+bd2c137 Add plots/ at repo root per addendum Section 9.4
+ plots/end.png   | Bin 0 -> 183718 bytes
+ plots/start.png | Bin 0 -> 328447 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+d85417c Add gitlog.txt snapshot for submission
+ gitlog.txt | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
 d95a227 Stop tracking build-generated PNGs in prog6_kmeans; preserved copies live in writeup_data/plots
+ .gitignore             |   1 +
+ prog6_kmeans/end.png   | Bin 183718 -> 0 bytes
+ prog6_kmeans/start.png | Bin 328447 -> 0 bytes
+ 3 files changed, 1 insertion(+)
 4fcc86d Add final write-up PDF
+ writeup.pdf | Bin 0 -> 144911 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
 5c52dce Preserve Program 6 start/end plots before final cleanup
+ writeup_data/plots/end.png   | Bin 0 -> 183718 bytes
+ writeup_data/plots/start.png | Bin 0 -> 328447 bytes
+ 2 files changed, 0 insertions(+), 0 deletions(-)
 fbc5243 Add Program 5 final 5-run measurement pass, confirms near-1x (occasionally sub-1x) speedup
+ writeup_data/program5_final_measurements.txt | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 c49a0ff Add Program 4 final 5-run measurement pass for both best and worst case inputs
+ prog4_sqrt/main.cpp                          | 19 ++++++++-----------
+ writeup_data/program4_final_measurements.txt | 18 ++++++++++++++++++
+ 2 files changed, 26 insertions(+), 11 deletions(-)
 47d4425 Add Program 3 final 5-run measurement pass with min/max
+ writeup_data/program3_final_measurements.txt | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
 77f151f Add Program 2 final 5-run measurement pass, confirms deterministic 83.6% utilization
+ writeup_data/program2_final_measurements.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 0c5f0fa Add Program 1 final 5-run measurement pass with min/max
+ writeup_data/program1_final_measurements.txt | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 aeea03a Parallelize Program 6 computeAssignments via std::thread; full-scale measurements confirm 2.245x speedup, clearing Amdahl-adjusted threshold
+ prog6_kmeans/end.png            | Bin 0 -> 183718 bytes
+ prog6_kmeans/kmeansThread.cpp   |  58 ++++++++++++++++++++++++++++------------
+ prog6_kmeans/start.png          | Bin 0 -> 328447 bytes
+ writeup_data/program6_final.txt |  31 +++++++++++++++++++++
+ 4 files changed, 72 insertions(+), 17 deletions(-)
 b225ff3 Add Program 6 profiling data confirming computeAssignments as the hotspot
+ prog6_kmeans/kmeansThread.cpp       |  6 ++++++
+ writeup_data/program6_profiling.txt | 21 +++++++++++++++++++++
+ 2 files changed, 27 insertions(+)
 d97d8b3 Add generate_data.py for Program 6 dataset generation
+ prog6_kmeans/generate_data.py | 149 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 149 insertions(+)
 ebc0f94 Add Program 5 saxpy analysis: memory-bandwidth bound, no task speedup
+ writeup_data/program5_saxpy_analysis.txt | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
 3c95d75 Add Program 4 worst-case input analysis (alternating fast/slow values)
+ prog4_sqrt/main.cpp                        | 15 +++++++++------
+ writeup_data/program4_worst_case_input.txt | 16 ++++++++++++++++
+ 2 files changed, 25 insertions(+), 6 deletions(-)
 3974abf Add Program 4 best-case input analysis (uniform slow-converging values)
+ prog4_sqrt/main.cpp                       | 11 +++++------
+ writeup_data/program4_best_case_input.txt | 16 ++++++++++++++++
+ 2 files changed, 21 insertions(+), 6 deletions(-)
 b39a0a4 Complete Program 3 Part 2: tune task count to 32, achieve 15.89x speedup (hardware ceiling)
+ prog3_mandelbrot_ispc/mandelbrot.ispc       |  9 ++++-----
+ writeup_data/program3_part2_task_tuning.txt | 16 ++++++++++++++++
+ 2 files changed, 20 insertions(+), 5 deletions(-)
 75ff13e Add Program 3 Part 1 analysis: SIMD speedup shortfall explained by lane divergence
+ writeup_data/program3_part1_analysis.txt | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 2ea7f1f Add Program 2 vector width sweep data and analysis, confirmed width 4 at 83.6%
+ writeup_data/program2_vector_width_sweep.txt | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 ef4b642 Implement clampedExpVector using CS149 fake SIMD intrinsics
+ prog2_vecintrin/main.cpp | 44 ++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 36 insertions(+), 8 deletions(-)
 1a2825f Fix Program 1 speedup data with actual measured values
+ writeup_data/program1_view1_speedup.txt | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 77f7dbe Add Program 1 speedup data across thread counts
+ writeup_data/program1_view1_speedup.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 ac474c4 Implement interleaved-row decomposition for Program 1
+ prog1_mandelbrot_threads/mandelbrotThread.cpp | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 99b992e Add missing includes for GCC 13 compatibility
+ prog1_mandelbrot_threads/main.cpp             | 1 +
+ prog1_mandelbrot_threads/mandelbrotThread.cpp | 1 +
+ 2 files changed, 2 insertions(+)
 046847f Add gitignore for build output and dataset
+ .gitignore | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 2b5071d Initial commit: unmodified CS149 starter code
+ README.md                                     |  435 +++++++++
+ README_aarch64.md                             |  408 ++++++++
+ common/CycleTimer.h                           |   27 +
+ common/ppm.cpp                                |   35 +
+ common/tasksys.cpp                            | 1246 +++++++++++++++++++++++++
+ handout-images/kmeans.jpg                     |  Bin 0 -> 574329 bytes
+ handout-images/mandelbrot_viz.jpg             |  Bin 0 -> 64877 bytes
+ handout-images/sqrt_graph.jpg                 |  Bin 0 -> 59297 bytes
+ prog1_mandelbrot_threads/Makefile             |   35 +
+ prog1_mandelbrot_threads/main.cpp             |  174 ++++
+ prog1_mandelbrot_threads/mandelbrotSerial.cpp |   92 ++
+ prog1_mandelbrot_threads/mandelbrotThread.cpp |   96 ++
+ prog2_vecintrin/CS149intrin.cpp               |  261 ++++++
+ prog2_vecintrin/CS149intrin.h                 |  126 +++
+ prog2_vecintrin/Makefile                      |   13 +
+ prog2_vecintrin/logger.cpp                    |   46 +
+ prog2_vecintrin/logger.h                      |   35 +
+ prog2_vecintrin/main.cpp                      |  280 ++++++
+ prog3_mandelbrot_ispc/Makefile                |   44 +
+ prog3_mandelbrot_ispc/main.cpp                |  211 +++++
+ prog3_mandelbrot_ispc/mandelbrot.ispc         |   79 ++
+ prog3_mandelbrot_ispc/mandelbrotSerial.cpp    |   92 ++
+ prog4_sqrt/Makefile                           |   44 +
+ prog4_sqrt/main.cpp                           |  103 ++
+ prog4_sqrt/sqrt.ispc                          |   62 ++
+ prog4_sqrt/sqrtSerial.cpp                     |   29 +
+ prog5_saxpy/Makefile                          |   40 +
+ prog5_saxpy/main.cpp                          |  120 +++
+ prog5_saxpy/saxpy.ispc                        |   39 +
+ prog5_saxpy/saxpySerial.cpp                   |   13 +
+ prog6_kmeans/Makefile                         |   37 +
+ prog6_kmeans/kmeansThread.cpp                 |  219 +++++
+ prog6_kmeans/main.cpp                         |  150 +++
+ prog6_kmeans/plot.py                          |   54 ++
+ prog6_kmeans/requirements.txt                 |    3 +
+ prog6_kmeans/utils.cpp                        |   88 ++
+ 36 files changed, 4736 insertions(+)
