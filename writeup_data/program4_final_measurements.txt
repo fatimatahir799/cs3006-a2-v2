@@ -1,0 +1,18 @@
+Program 4 final measurement pass, 5 repetitions per input, on Intel i5-7200U:
+
+Worst case (alternating 1.0 / 2.999):
+  ISPC no-tasks: 3.30x, 3.31x, 3.27x, 3.30x, 3.30x
+    min: 3.27x, max: 3.31x
+  ISPC with tasks: 10.86x, 10.74x, 10.73x, 10.60x, 10.88x
+    min: 10.60x, max: 10.88x
+
+Best case (uniform 2.999):
+  ISPC no-tasks: 6.43x, 6.47x, 6.44x, 6.40x, 6.48x
+    min: 6.40x, max: 6.48x
+  ISPC with tasks: 20.86x, 20.93x, 20.73x, 21.05x, 20.84x
+    min: 20.73x, max: 21.05x
+
+Note: Both input configurations show very tight, consistent results across
+5 repetitions (max variation under 0.4x in all cases), confirming the
+best/worst-case behavior is a robust property of the input distribution
+rather than measurement noise.
