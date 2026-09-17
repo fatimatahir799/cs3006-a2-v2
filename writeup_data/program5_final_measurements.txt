@@ -1,0 +1,13 @@
+Program 5 final measurement pass, 5 repetitions, N=20 million, on Intel i5-7200U:
+
+Speedup from tasks: 0.99x, 0.97x, 0.98x, 0.98x, 1.01x
+  min: 0.97x, max: 1.01x
+
+Note: Across 5 repetitions, task-based speedup hovers right around 1.0x,
+with most runs falling slightly BELOW 1.0x rather than above. This
+strengthens the memory-bandwidth-bound explanation: once the single-core
+SIMD version already saturates the machine's memory bus, launching
+additional tasks adds thread-spawn and synchronization overhead without
+unlocking any additional throughput, since there is no spare bandwidth
+left for the extra cores to exploit. The result is a wash at best, and a
+very slight net slowdown in most runs.
