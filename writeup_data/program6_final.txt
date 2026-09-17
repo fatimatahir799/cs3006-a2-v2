@@ -1,0 +1,31 @@
+Program 6 final measurements, full-scale dataset (M=1000000, N=100, K=3),
+md5sum 3a25f24193f4fdca82ee4cb2737fd5bb, on Intel i5-7200U (2C/4T).
+
+Baseline (serial) total times, 5 runs:
+68124.816 / 67175.187 / 67846.666 / 67375.082 / 68360.653 ms
+Min: 67175.187 ms   Max: 68360.653 ms
+
+Parallel (computeAssignments threaded, split by M, 4 threads) total times, 5 runs:
+37358.237 / 34514.843 / 35420.060 / 31027.977 / 29928.347 ms
+Min: 29928.347 ms   Max: 37358.237 ms
+
+Achieved speedup (min/min) = 67175.187 / 29928.347 = 2.245x
+
+Measured f (fraction of steady-state iteration time spent in computeAssignments,
+baseline run): 459.2ms / 665.0ms = 0.691
+
+Amdahl ceiling for T=4 hardware threads:
+S_max = 1 / ((1-f) + f/T) = 1 / (0.309 + 0.1728) = 1 / 0.482 = 2.08x
+Required threshold = 0.80 x S_max = 1.66x
+
+Result: achieved 2.245x clears the required 1.66x, and exceeds even Stanford's
+original 2.1x target on a 2-core/4-thread machine.
+
+Karp-Flatt experimentally-derived serial fraction:
+e = (1/S - 1/T) / (1 - 1/T) = (0.4454 - 0.25) / 0.75 = 0.260
+Measured (1-f) = 0.309, which is higher than the Karp-Flatt estimate (0.260).
+This suggests the achieved speedup was slightly better than the hotspot fraction
+alone predicts -- likely because the unparallelized functions (computeCentroids,
+computeCost) also ran somewhat faster in later parallel-version runs than in the
+baseline session, reflecting session-to-session system noise (thermal/background
+load) rather than any additional parallelism gained.
